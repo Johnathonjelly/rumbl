@@ -2,6 +2,7 @@ defmodule Rumbl.Accounts do
   @moduledoc """
   The Accounts context.
   """
+  alias Rumbl.Accounts.Credential
   alias Rumbl.Accounts.User
   alias Rumbl.Repo
 
@@ -30,8 +31,6 @@ defmodule Rumbl.Accounts do
     |> User.changeset(attrs)
     |> Repo.insert()
   end
-
-  alias Rumbl.Accounts.Credential
 
   @doc """
   Returns the list of credentials.
@@ -125,5 +124,11 @@ defmodule Rumbl.Accounts do
   """
   def change_credential(%Credential{} = credential) do
     Credential.changeset(credential, %{})
+  end
+
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> User.registration_changeset(attrs)
+    |> Repo.insert()
   end
 end
